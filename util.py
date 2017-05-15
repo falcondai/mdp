@@ -1,4 +1,5 @@
 import scipy.signal
+import numpy as np
 
 # reward processing
 def discount(rewards, gamma):
@@ -27,3 +28,15 @@ def lambda_return(rewards, values, gamma, td_lambda, bootstrap_value):
     td_error = td_return(rewards, values, gamma, bootstrap_value) - values
     lambda_error = discount(td_error, gamma * td_lambda)
     return lambda_error + values
+
+def default_ooe_value(default_value):
+    ''' use a constant for OOE value in tabular models '''
+    return lambda _, __: default_value
+
+def random_ooe_value(low, high):
+    ''' fill in a uniformly random value for OOE entries in tabular models '''
+    def _fill(ob, value_dict):
+        v = np.random.uniform(low, high)
+        value_dict[ob] = v
+        return v
+    return _fill

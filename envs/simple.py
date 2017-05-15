@@ -1,8 +1,8 @@
-from core import MDP
+from core import EpisodicMDP
 from spaces import NamedDiscrete
 import numpy as np
 
-class SimpleMDP(MDP):
+class SimpleMDP(EpisodicMDP):
     def __init__(self, states, actions, transition_graph, reward_function, initial_state_probs, is_terminal):
         assert isinstance(states, (list, tuple)), '`states` has to be a list or a tuple.'
         assert isinstance(actions, (list, tuple)), '`actions` has to be a list or a tuple.'
@@ -22,7 +22,7 @@ class SimpleMDP(MDP):
         sample_initial_state = lambda : np.random.choice(states, p=initial_state_probs)
         termination_set = lambda state : is_terminal[state_space.to_index(state)]
 
-        super(SimpleMDP, self).__init__(state_space, action_space, transition_function, reward_function, sample_initial_state, termination_set)
+        super(SimpleMDP, self).__init__(state_space=state_space, action_space=action_space, transition_function=transition_function, reward_function=reward_function, sample_initial_state=sample_initial_state, gamma=1., termination_set=termination_set)
 
 
 class RecyclingRobotMDP(SimpleMDP):
@@ -74,20 +74,20 @@ class RandomWalkMDP(SimpleMDP):
     '''
     def __init__(self):
         states = ['terminal', 'A', 'B', 'C', 'D', 'E']
+        is_terminal = [True, False, False, False, False, False]
         actions = ['left', 'right']
 
         transition_graph = {}
         for i in xrange(1, len(states)):
             transition_graph[(states[i], 'left', states[i-1])] = 1.
             transition_graph[(states[i], 'right', states[(i+1) % len(states)])] = 1.
-        print transition_graph
         reward_function = lambda state, action, next_state : 1. if state == 'E' and action == 'right' else 0.
-        super(RandomWalkMDP, self).__init__(states, actions, transition_graph, reward_function, [0., 1./5, 1./5, 1./5, 1./5, 1./5], [True, False, False, False, False, False])
+        super(RandomWalkMDP, self).__init__(states, actions, transition_graph, reward_function, [0., 1./5, 1./5, 1./5, 1./5, 1./5], is_terminal)
 
 
 if __name__ == '__main__':
-    # e = RecyclingRobotMDP(0.6, 0.9, 1., 0.1, 0.9)
-    e = RandomWalkMDP()
+    e = RecyclingRobotMDP(0.6, 0.9, 1., 0.1, 0.9)
+    # e = RandomWalkMDP()
     print e.reset()
     for t in xrange(100):
         a = e.action_space.sample()
