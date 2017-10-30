@@ -1,6 +1,7 @@
-from core import EpisodicMDP
-from spaces import NamedDiscrete
 import numpy as np
+
+from .core import EpisodicMDP
+from mdp.spaces import NamedDiscrete
 
 class SimpleMDP(EpisodicMDP):
     def __init__(self, states, actions, transition_graph, reward_function, initial_state_probs, is_terminal):
@@ -88,7 +89,7 @@ class RandomWalkMDP(SimpleMDP):
 if __name__ == '__main__':
     e = RecyclingRobotMDP(0.6, 0.9, 1., 0.1, 0.9)
     # e = RandomWalkMDP()
-    print e.reset()
+    print(e.reset())
     for t in xrange(100):
         a = e.action_space.sample()
-        print t, a, e.step(a)
+        print(t, a, e.step(a))

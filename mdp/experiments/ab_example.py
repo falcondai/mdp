@@ -1,4 +1,4 @@
-from spaces import NamedDiscrete
+from mdp.spaces import NamedDiscrete
 
 observation_space = NamedDiscrete(['A', 'B', 'terminal1', 'terminal2'])
 

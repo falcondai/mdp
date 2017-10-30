@@ -103,7 +103,7 @@ class AbstractPOMDP(object):
 
 
 if __name__ == '__main__':
-    import spaces
+    from mdp import spaces
 
     def t(s, a): return s + a if s + a < 4 else 3
 
@@ -120,10 +120,10 @@ if __name__ == '__main__':
         gamma=1.,
         )
 
-    # print env.reset()
-    # print env.step(1)
-    # print env.step(1)
-    # print env.step(1)
+    # print(env.reset())
+    # print(env.step(1))
+    # print(env.step(1))
+    # print(env.step(1))
 
     def m(s): return s
     pomdp = EpisodicPOMDP(
@@ -137,7 +137,7 @@ if __name__ == '__main__':
         gamma=1.,
         measurement_function=m,
         )
-    print pomdp.reset()
-    print pomdp.step(1)
-    print pomdp.step(1)
-    print pomdp.step(1)
+    print(pomdp.reset())
+    print(pomdp.step(1))
+    print(pomdp.step(1))
+    print(pomdp.step(1))

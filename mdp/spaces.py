@@ -105,12 +105,12 @@ class Union(Space):
 
 if __name__ == '__main__':
     b = Lattice([0, 10], [2, 20])
-    print b.low, b.high, b.ptp, b.shape
-    print b.sample()
+    print(b.low, b.high, b.ptp, b.shape)
+    print(b.sample())
 
     c = Discrete(100)
     t = Tuple(b, c)
-    print t.sample()
+    print(t.sample())
 
     s = Screen(2, 4, 3)
-    print s.sample()
+    print(s.sample())

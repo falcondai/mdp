@@ -1,6 +1,8 @@
-from envs.simple import RandomWalkMDP
-from agents.core import RandomActor, FirstVisitMcV, FirstVisitMcQ, EveryVisitMcV, EveryVisitMcQ, AlphaTabularModel, TabularModel, QFromVCritic, TdV, TdQ
-from util import default_ooe_value, random_ooe_value
+from __future__ import print_function, absolute_import, division
+
+from mdp.envs.simple import RandomWalkMDP
+from mdp.agents.core import RandomActor, FirstVisitMcV, FirstVisitMcQ, EveryVisitMcV, EveryVisitMcQ, AlphaTabularModel, TabularModel, QFromVCritic, TdV, TdQ
+from mdp.util import default_ooe_value, random_ooe_value
 
 import sys
 import numpy as np

@@ -1,6 +1,6 @@
 import numpy as np
-from spaces import Tuple
-from util import discount
+from mdp.spaces import Tuple
+from mdp.util import discount
 
 
 class Actor(object):
